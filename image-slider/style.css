@@ -1,0 +1,352 @@
+:root {
+  --background-color: #202020;
+  --text-color: #ffffff;
+  --accent-color: #E78F8E;
+  --container-width: 1140px;
+  --font-family: "Poppins", sans-serif;
+  --letter-spacing: 5px;
+  --border-radius: 20px;
+  --text-shadow: 0 0 1px var(--background-color);
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--background-color);
+  color: var(--text-color);
+  margin: 0;
+  font-size: 12px;
+}
+
+a {
+  text-decoration: none;
+  color: var(--text-color);
+}
+
+header {
+  position: relative;
+  z-index: 10;
+  width: var(--container-width);
+  max-width: 80%;
+  margin: auto;
+  height: 100px;
+  display: flex;
+  align-items: center;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  width: 100%;
+}
+
+/* Carousel */
+.carousel {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  margin-top: -100px;
+  overflow: hidden;
+}
+
+.carousel-item {
+  position: absolute;
+  inset: 0 0 0 0;
+  height: 100%;
+  width: 100%;
+}
+
+.carousel-item:nth-child(1) {
+  z-index: 1;
+}
+
+.carousel-item:nth-child(1) .carousel-item-content-title {
+  animation-delay: 1s;
+}
+
+.carousel-item:nth-child(1) .carousel-item-content-tag {
+  animation-delay: 1.2s;
+}
+
+.carousel-item:nth-child(1) .carousel-item-content-description {
+  animation-delay: 1.4s;
+}
+
+.carousel-item:nth-child(1) .carousel-item-content-buttons {
+  animation-delay: 1.6s;
+}
+
+.carousel-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.carousel-item-content {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  width: var(--container-width);
+  max-width: 80%;
+  transform: translateX(-50%);
+  padding-right: 30%;
+  box-sizing: border-box;
+  text-shadow: var(--text-shadow);
+}
+
+.carousel-item-content-author,
+.carousel-item-content-title,
+.carousel-item-content-tag,
+.carousel-item-content-description,
+.carousel-item-content-buttons {
+  transform: translateY(50px);
+  filter: blur(10px);
+  opacity: 0;
+  animation: fadeInSlide 0.5s 1s linear 1 forwards;
+}
+
+.carousel-item-content-author {
+  font-weight: bold;
+  letter-spacing: var(--letter-spacing);
+  text-transform: uppercase;
+}
+
+.carousel-item-content-title,
+.carousel-item-content-tag {
+  font-size: 5em;
+  font-weight: bold;
+  line-height: 1.3em;
+  text-transform: uppercase;
+}
+
+.carousel-item-content-tag {
+  color: var(--accent-color);
+}
+
+.carousel-item-content-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.carousel-item-content-buttons button {
+  padding: 15px 20px;
+  border: none;
+  font-family: var(--font-family);
+  font-weight: 700;
+  letter-spacing: var(--letter-spacing);
+  text-transform: uppercase;
+}
+
+.carousel-item-content-buttons button:nth-child(2) {
+  background-color: transparent;
+  color: var(--text-color);
+  border: 2px solid var(--text-color);
+}
+
+/* Carousel thumbnails */
+.carousel-thumbnails {
+  position: absolute;
+  z-index: 10;
+  display: flex;
+  gap: 20px;
+  bottom: 100px;
+  left: 50%;
+  width: max-content;
+}
+
+.carousel-thumbnail-item {
+  position: relative;
+  flex-shrink: 0;
+  width: 150px;
+  height: 200px;
+}
+
+.carousel-thumbnail-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--border-radius);
+}
+
+.carousel-thumbnail-item-content {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  right: 10px;
+  text-shadow: var(--text-shadow);
+}
+
+.carousel-thumbnail-item-content-title {
+  font-weight: bold;
+}
+
+/* Carousel controls */
+.carousel-controls {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  top: 80%;
+  right: 52%;
+  width: 300px;
+  max-width: 30%;
+  z-index: 2;
+}
+
+.carousel-controls button {
+  font-family: monospace;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: var(--text-color);
+  font-weight: bold;
+  font-size: 1.6rem;
+  transition: all 0.2s ease-in-out;
+  text-shadow: var(--text-shadow);
+  cursor: pointer;
+}
+
+.carousel-controls button:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+  color: var(--background-color);
+}
+
+/* Next slide */
+.carousel.next .carousel-item:nth-child(1) img {
+  position: absolute;
+  width: 150px;
+  height: 200px;
+  left: 50%;
+  bottom: 100px;
+  border-radius: var(--border-radius);
+  animation: showImage 0.5s linear 1 forwards;
+}
+
+.carousel.next .carousel-item:nth-last-child(1) {
+  width: 0;
+  overflow: hidden;
+  animation: showThumbnail 0.5s linear 1 forwards;
+}
+
+.carousel.next .carousel-thumbnail-item {
+  transform: translateX(150px);
+  animation: moveThumbnail 0.5s linear 1 forwards;
+}
+
+/* Previous slide */
+.carousel.prev .carousel-item img {
+  z-index: 10;
+}
+
+.carousel.prev .carousel-item:nth-child(2) {
+  z-index: 2;
+}
+
+.carousel.prev .carousel-item:nth-child(2) img {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  animation: hideImage 0.5s linear 1 forwards;
+}
+
+.carousel.prev .thumbnail-item:nth-child(1) {
+  opacity: 0;
+  overflow: hidden;
+  animation: showThumbnail 0.5s linear 1 forwards;
+}
+
+.carousel.prev .carousel-item-content-author,
+.carousel.prev .carousel-item-content-title,
+.carousel.prev .carousel-item-content-tag,
+.carousel.prev .carousel-item-content-description,
+.carousel.prev .carousel-item-content-buttons {
+  animation: fadeOutContent 0.5s linear 1 forwards;
+}
+
+.carousel.next .carousel-controls button,
+.carousel.prev .carousel-controls button {
+  pointer-events: none;
+}
+
+/* Running Time */
+.running-time {
+  position: absolute;
+  width: 0;
+  height: 7px;
+  background-color: var(--accent-color);
+  z-index: 11;
+}
+
+.carousel.next .running-time,
+.carousel.prev .running-time {
+  width: 100%;
+  animation: runningTime 2s linear 1 forwards;
+}
+
+/* Responsiveness */
+@media screen and (max-width: 678px) {
+  .carousel-item-content {
+    padding-right: 0;
+  }
+  .carousel-item-content .title{
+    font-size: 30px;
+  }
+}
+
+/* Keyframes */
+@keyframes fadeInSlide {
+  to {
+    transform: translateY(0);
+    filter: blur(0);
+    opacity: 1;
+  }
+}
+
+@keyframes showImage {
+  to {
+    width: 100%;
+    height: 100%;
+    left: 0;
+    bottom: 0;
+    border-radius: 0;
+  }
+}
+
+@keyframes showThumbnail {
+  to {
+    width: 150px;
+  }
+}
+
+@keyframes moveThumbnail {
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes hideImage {
+  to {
+    width: 150px;
+    height: 200px;
+    left: 50%;
+    bottom: 100px;
+    border-radius: var(--border-radius);
+  }
+}
+
+@keyframes fadeOutContent {
+  to {
+    transform: translateY(-150px);
+    filter: blur(10px);
+    opacity: 0;
+  }
+}
+
+@keyframes runningTime {
+  to {
+    width: 0;
+  }
+}
